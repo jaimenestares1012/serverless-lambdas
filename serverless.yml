@@ -1,3 +1,4 @@
+
 service: myserverlessproject
 
 frameworkVersion: '3'
@@ -13,6 +14,7 @@ provider:
       Action:
         - dynamodb:*
         - s3:*
+        - ses:*
       Resource: '*'
   apiGateway:
     apiKeys:
@@ -20,29 +22,6 @@ provider:
         value: Lc9XtRmZ8OaJzKvS2q0F
       - name: MyPaidApiKey
         value: hY4sDpGnT3iXbM6oWfEj
-    usagePlan:
-      my-free-plan:
-        name: my-free-plan
-        description: My Free Plan
-        free:
-          quota:
-            limit: 10000
-            period: MONTH
-          throttle:
-            burstLimit: 500
-            rateLimit: 200
-      my-paid-plan:
-        name: my-paid-plan
-        description: My Paid Plan
-        paid:
-          quota:
-            limit: 50000
-            period: MONTH
-          throttle:
-            burstLimit: 1000
-            rateLimit: 500
-
-
 
 functions:
   getUser:
@@ -81,7 +60,30 @@ functions:
           path: get-file/{fileName}
           method: GET
           cors: true
+  pproxy:
+    handler: lambdas/endpoints/proxy.handler
+    events:
+      - http:
+          path: chuck-norris/{proxy+}
+          method: ANY
+          integration: lambda-proxy
+          request:
+            parameters:
+              paths:
+                proxy: true
+  sendEmail:
+    handler: lambdas/endpoints/sendEmail.handler
+    events:
+      - http:
+          path: send-email
+          method: POST
+          cors: true
       
+
+
+      
+      
+
 plugins:
   - serverless-s3-sync
   - serverless-webpack
