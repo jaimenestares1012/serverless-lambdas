@@ -1,4 +1,3 @@
-
 service: myserverlessproject
 
 frameworkVersion: '3'
@@ -21,25 +20,26 @@ provider:
         value: Lc9XtRmZ8OaJzKvS2q0F
       - name: MyPaidApiKey
         value: hY4sDpGnT3iXbM6oWfEj
-  usagePlan:
-    - name: my-free-plan
-      description: My Free Plan
-      free:
-        quota:
-          limit: 10000
-          period: MONTH
-        throttle:
-          burstLimit: 500
-          rateLimit: 200
-    - name: my-paid-plan
-      description: My Paid Plan
-      paid:
-        quota:
-          limit: 50000
-          period: MONTH
-        throttle:
-          burstLimit: 1000
-          rateLimit: 500
+    usagePlan:
+      - name: my-free-plan
+        description: My Free Plan
+        free:
+          quota:
+            limit: 10000
+            period: MONTH
+          throttle:
+            burstLimit: 500
+            rateLimit: 200
+      - name: my-paid-plan
+        description: My Paid Plan
+        paid:
+          quota:
+            limit: 50000
+            period: MONTH
+          throttle:
+            burstLimit: 1000
+            rateLimit: 500
+
 
 functions:
   getUser:
@@ -79,9 +79,6 @@ functions:
           method: GET
           cors: true
       
-            
-      
-
 plugins:
   - serverless-s3-sync
   - serverless-webpack
