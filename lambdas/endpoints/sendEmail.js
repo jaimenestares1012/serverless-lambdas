@@ -9,18 +9,18 @@ exports.handler =  async event =>{
         Responses._400({message: "to, from, subjet and text are required"})
     }
 
-    const params  = {
-        Destination:{
-            toAddresses: [to]
+    const params = {
+        Destination: {
+          ToAddresses: [to]
         },
-        Message:{
-            body:{
-                Text:{ Data: text }
-            },
-            Subject: { Data: subject}
+        Message: {
+          Body: {
+            Text: { Data: text }
+          },
+          Subject: { Data: subject }
         },
         Source: from
-    };
+      };
     try {
         await SES.sendEmail(params).promise()
         return Responses._200({})
