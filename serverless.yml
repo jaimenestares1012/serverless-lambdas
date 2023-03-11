@@ -21,7 +21,8 @@ provider:
       - name: MyPaidApiKey
         value: hY4sDpGnT3iXbM6oWfEj
     usagePlan:
-      - name: my-free-plan
+      my-free-plan:
+        name: my-free-plan
         description: My Free Plan
         free:
           quota:
@@ -30,7 +31,8 @@ provider:
           throttle:
             burstLimit: 500
             rateLimit: 200
-      - name: my-paid-plan
+      my-paid-plan:
+        name: my-paid-plan
         description: My Paid Plan
         paid:
           quota:
@@ -39,6 +41,7 @@ provider:
           throttle:
             burstLimit: 1000
             rateLimit: 500
+
 
 
 functions:
