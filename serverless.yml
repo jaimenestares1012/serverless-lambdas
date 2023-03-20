@@ -121,12 +121,13 @@ resources:
       Properties:
         RoleName: MyAssumeRole
         AssumeRolePolicyDocument:
-          Version: '2020-12-23'
+          Version: '2012-10-17'
           Statement:
             - Effect: Allow
               Principal:
                 Service:
                   - lambda.amazonaws.com
                   - apigateway.amazonaws.com  
-                Action:
-                  - sts: AssumeRole
+              Action:
+                - sts:AssumeRole
+
